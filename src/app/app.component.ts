@@ -61,19 +61,18 @@ export class AppComponent implements OnInit {
   }
   getFormValidationErrors() {
     this.e=[];
-    Object.keys(this.form.controls).forEach(key => {
-    
-    const controlErrors: ValidationErrors = this.form.get(key).errors;
-    if (controlErrors != null) {
+    Object.keys(this.form.controls).forEach(key => {   
+      const controlErrors: ValidationErrors = this.form.get(key).errors;
+      if (controlErrors != null) {
           Object.keys(controlErrors).forEach(keyError => {
-            console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-            //this.e.push('Key control: ' + key + ', keyError: ' + keyError + ', err value: '+ controlErrors[keyError]);
-            this.e.push('please fill out all required fields');
-          });
+               console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+               //this.e.push('Key control: ' + key + ', keyError: ' + keyError + ', err value: '+ controlErrors[keyError]);
+               this.e.push('please fill out all required fields');
+             });
         }
       });
       
-    }
+  }
   getQuestions() {
     this._questionService.list().subscribe(
       // the first argument is a function which runs on success
@@ -120,9 +119,7 @@ export class AppComponent implements OnInit {
       let newtest = {json:this.form.value};
       this._questionService.create(newtest, this.user.token).subscribe(
           data => {
-            // refresh the list
-            //this.getPosts();
-            //console.log(data);
+            // refresh the form
             this.sent = true;
             this.form.reset();
             this.uncheckAll();
